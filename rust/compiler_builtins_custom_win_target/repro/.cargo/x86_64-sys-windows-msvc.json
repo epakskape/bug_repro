@@ -1,0 +1,43 @@
+{
+    "_": "Inspired by https://github.com/ryanbreen/breenix/blob/master/x86_64-unknown-none-gnu.json and https://github.com/pravic/kmd-env-rs/blob/master/.cargo/x86_64-sys-windows-msvc.json",
+  
+    "llvm-target": "x86_64-pc-windows-msvc",
+    "target-endian": "little",
+    "target-pointer-width": "64",
+    "target-c-int-width": "32",
+    "os": "windows",
+    "env": "msvc",
+    "vendor": "pc",
+    "arch": "x86_64",
+    "linker-flavor": "msvc",
+    "data-layout": "e-m:w-i64:64-f80:128-n8:16:32:64-S128",
+
+    "code-model": "kernel",
+    "cpu": "x86-64",
+    "disable-redzone": true,
+    "dll-prefix": "",
+    "dll-suffix": ".sys",
+    "dynamic-linking": true,
+    "eliminate-frame-pointer": false,
+    "executables": true,
+    "exe-prefix": "",
+    "exe-suffix": ".exe",
+    "features": "-mmx,-sse,-sse2,-sse3,-ssse3,-sse4.1,-sse4.2,-3dnow,-3dnowa,-avx,-avx2",
+    "function-sections": true,
+    "has-elf-tls": false,
+    "is-like-windows": true,
+    "is-like-msvc": true,
+    "no-default-libraries": true,
+    "position-independent-executables": false,
+    "relocation-model": "dynamic-no-pic",
+    "staticlib-prefix": "lib",
+    "staticlib-suffix": ".lib",
+    
+    "pre-link-args": { 
+      "msvc": ["/NOLOGO", "/NODEFAULTLIB", "/SUBSYSTEM:NATIVE", "/DRIVER", "/RELEASE", "/NXCOMPAT", "/DYNAMICBASE", "/INCREMENTAL:NO", "/MANIFEST:NO"] 
+    },
+  
+    "post-link-args": {
+      "msvc": ["/OPT:REF,ICF", "ntoskrnl.lib", "hal.lib", "/noimplib", "/ENTRY:DriverEntry", "/DEF:exports.def", "/MERGE:.edata=.rdata", "/MERGE:.rustc=.data"]
+    }
+  }

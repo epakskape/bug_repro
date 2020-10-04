@@ -1,0 +1,3 @@
+[build]
+target = "x86_64-sys-windows-msvc"
+rustflags = ["--cfg", "disable_float", "-C", "soft-float"]
